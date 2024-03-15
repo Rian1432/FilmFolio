@@ -5,7 +5,7 @@ O frontend da aplicação foi desenvolvido com Angular e o backend foi simulado 
 
 ## Endereço de Deploy - GitHub Pages
 
-* Sem link
+[* Sem link](https://rian1432.github.io/FilmFolio/)
 
 ## Protótipo
 
