@@ -1,0 +1,16 @@
+@import './fonts.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .default-input {
+    @apply input input-bordered flex items-center gap-2 bg-secondary border-base-100 text-base-100 focus:border-base-100
+  }
+}
+
+* {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+}
