@@ -1,6 +1,10 @@
-<div class="grid gap-y-3">
+<div class="grid gap-y-3 w-full lg:w-3/4 h-full mx-auto">
+  <div class="text-center text-3xl mb-5 font-semibold text-accent px-20">
+    Pesquise aqui por fimes já assistiu, ou que você quer ver:
+  </div>
+
   <label class="custom-input">
-    <input [(ngModel)]="inputValue" type="text" class="grow" placeholder="Pesquisar por filmes" />
+    <input (input)="searchForMovies()" [(ngModel)]="inputValue" type="text" class="grow" placeholder="Pesquisar por filmes" />
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="#F7FBEF" class="w-4 h-4 opacity-70">
       <path
         fill-rule="evenodd"
@@ -10,6 +14,25 @@
   </label>
   <br>
 
-  <button (click)="teste()" class="btn">teste</button>
-  {{ inputValue }}
+  <div *ngIf="movieList.length !== 0" class="grid sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-5 gap-5 justify-center">
+    <div
+      *ngFor="let movie of movieList"
+      [title]="movie.Title"
+      class="flex flex-col gap-y-2 max-w-44 hover:scale-105 duration-200 cursor-pointer"
+    >
+      <div class="flex flex-col items-center justify-center shadow flex-grow">
+        <img [src]="movie.Poster" [alt]="movie.Title">
+      </div>
+
+      <div class="text-center text-sm h-10 truncate" >
+        {{ movie.Title }}
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="movieList.length === 0 && !loading" class="text-xl text-center opacity-55">
+    Nenhum filme encontrado.
+  </div>
+
+  <app-loader *ngIf="loading" />
 </div>
