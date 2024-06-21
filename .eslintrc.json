@@ -30,7 +30,9 @@
             "prefix": "app",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "@typescript-eslint/indent": ["error", 2],
+        "indent": "off"
       }
     },
     {
