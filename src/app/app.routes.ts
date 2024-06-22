@@ -5,9 +5,10 @@ import {MyMoviesComponent} from "./pages/my-movies/my-movies.component";
 import {LoginComponent} from "./pages/login/login.component";
 import {RegisterComponent} from "./pages/register/register.component";
 import {MovieDetailsComponent} from "./pages/movie-details/movie-details.component";
+import {permissionGuard} from "./guards/permission.guard";
 
 export const routes: Routes = [
-  {path: 'filmes',
+  {path: 'filmes', canActivateChild: [permissionGuard],
     children: [
       {path: '', component: MoviesComponent},
       {path: ':id', component: MovieDetailsComponent},
