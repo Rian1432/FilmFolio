@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import {FormsModule} from "@angular/forms";
-import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
+import {Router, RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {MoviesService} from "../../services/movies.service";
 import {NgForOf, NgIf} from "@angular/common";
 import {MovieInterface, SearchInterface} from "../../interfaces/movie-interface";
 import {LoaderComponent} from "../../components/loader/loader.component";
 import { debounce } from "lodash";
+import {MovieListComponent} from "../../components/movie-list/movie-list.component";
 
 @Component({
   selector: 'app-movies',
@@ -17,7 +18,8 @@ import { debounce } from "lodash";
     NgIf,
     LoaderComponent,
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
+    MovieListComponent
   ],
   templateUrl: './movies.component.html',
 })
@@ -27,7 +29,10 @@ export class MoviesComponent {
   public loading:boolean = false;
   public searchForMovies = debounce(this.getMovies, 300);
 
-  constructor(private MoviesService: MoviesService) {}
+  constructor(
+    private MoviesService: MoviesService,
+    private router: Router
+  ) {}
 
   async getMovies():Promise<void> {
     this.loading = true;
@@ -43,5 +48,9 @@ export class MoviesComponent {
         },
         error: (e) => console.error(e),
       })
+  }
+
+  showMovie(movieId: string | number):void {
+    this.router.navigate([`/filmes/${movieId}`]);
   }
 }
