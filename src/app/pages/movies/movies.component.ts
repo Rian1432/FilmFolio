@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {FormsModule} from "@angular/forms";
-import {RouterOutlet} from "@angular/router";
+import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {MoviesService} from "../../services/movies.service";
 import {NgForOf, NgIf} from "@angular/common";
 import {MovieInterface, SearchInterface} from "../../interfaces/movie-interface";
@@ -15,7 +15,9 @@ import { debounce } from "lodash";
     RouterOutlet,
     NgForOf,
     NgIf,
-    LoaderComponent
+    LoaderComponent,
+    RouterLink,
+    RouterLinkActive
   ],
   templateUrl: './movies.component.html',
 })
@@ -25,13 +27,13 @@ export class MoviesComponent {
   public loading:boolean = false;
   public searchForMovies = debounce(this.getMovies, 300);
 
-  constructor(private service: MoviesService) {}
+  constructor(private MoviesService: MoviesService) {}
 
   async getMovies():Promise<void> {
     this.loading = true;
     this.movieList = [];
 
-    (await this.service.getMovies(this.inputValue))
+    (await this.MoviesService.index(this.inputValue))
       .subscribe({
         next:(data:MovieInterface) => {
           if (data.Response === 'True') {
