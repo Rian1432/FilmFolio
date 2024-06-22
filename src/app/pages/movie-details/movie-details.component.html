@@ -1,0 +1,46 @@
+<div *ngIf="movie" class="flex flex-col md:flex-row gap-x-10 justify-center items-center md:items-start">
+  <img [src]="movie.Poster" [alt]="movie.Title" class="max-w-72 md:max-w-3xl">
+
+  <div class="flex flex-col justify-between">
+    <div class="mb-5">
+      <h1 class="text-2xl font-bold text-accent mb-5 md:mt-0 mt-5">
+        {{movie.Title}}
+      </h1>
+
+      <ul class="flex flex-col gap-y-3 text-lg">
+        <li>
+          <span class="font-bold">Diretor:</span> {{ movie.Director }}
+        </li>
+        <li>
+          <span class="font-bold">Gênero:</span> {{ movie.Genre }}
+        </li>
+        <li>
+          <span class="font-bold">Data de lançamento:</span> {{ movie.Released | date : 'dd/MM/yyyy' }}
+        </li>
+        <li>
+          <span class="font-bold">Atores:</span> {{ movie.Actors }}
+        </li>
+        <li>
+          <span class="font-bold">duração:</span> {{ movie.Runtime }}
+        </li>
+        <li>
+          <span class="font-bold">Bilheteria:</span> {{ 'US' + movie.BoxOffice }}
+        </li>
+        <li>
+          <span class="font-bold">Diretor:</span> {{ movie.Director }}
+        </li>
+      </ul>
+    </div>
+    <button (click)="backPageHistory()" class="btn btn-accent w-max">
+      < Voltar
+    </button>
+  </div>
+</div>
+
+<div *ngIf="loading" class="my-20">
+  <app-loader />
+</div>
+
+<div *ngIf="!movie && !loading">
+  Infelizmente o filme não foi encontrado! Tente novamente mais tarde.
+</div>

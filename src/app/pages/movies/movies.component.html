@@ -1,10 +1,24 @@
-<div class="grid gap-y-3">
-  <label class="input input-bordered flex items-center gap-2 bg-secondary border-base-100 text-base-100">
-    <input [(ngModel)]="inputValue" type="text" class="grow" placeholder="Pesquisar por filmes" />
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="#F7FBEF" class="w-4 h-4 opacity-70"><path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" /></svg>
-  </label>
-  <div class="text-base-100">
-    <br>
-    {{ inputValue }}
+<div class="grid gap-y-3 w-full lg:w-3/4 h-full mx-auto">
+  <div class="text-center text-3xl mb-5 font-semibold text-accent px-20">
+    Pesquise aqui por fimes já assistiu, ou que você quer ver:
   </div>
+
+  <label class="custom-input">
+    <input (input)="searchForMovies()" [(ngModel)]="inputValue" type="text" class="grow" placeholder="Pesquisar por filmes" />
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="#F7FBEF" class="w-4 h-4 opacity-70">
+      <path
+        fill-rule="evenodd"
+        d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+        clip-rule="evenodd" />
+    </svg>
+  </label>
+  <br>
+
+  <app-movie-list *ngIf="movieList.length !== 0" [movieList]="movieList" (show)="showMovie($event)" />
+
+  <div *ngIf="movieList.length === 0 && !loading" class="text-xl text-center opacity-55">
+    Nenhum filme encontrado.
+  </div>
+
+  <app-loader *ngIf="loading" />
 </div>

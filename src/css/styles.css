@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 @layer components {
-  .default-input {
+  .custom-input {
     @apply input input-bordered flex items-center gap-2 bg-secondary border-base-100 text-base-100 focus:border-base-100
   }
 }

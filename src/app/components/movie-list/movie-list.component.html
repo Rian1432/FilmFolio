@@ -1,0 +1,17 @@
+<div *ngIf="movieList.length !== 0" class="grid sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-5 gap-5 justify-center">
+  <div
+    *ngFor="let movie of movieList"
+    [title]="movie.Title"
+    class="flex flex-col gap-y-2 max-w-44 hover:scale-105 duration-200 cursor-pointer"
+  >
+    <div (click)="showItem(movie.imdbID)">
+      <div class="flex flex-col items-center justify-center shadow flex-grow">
+        <img [src]="movie.Poster" [alt]="movie.Title">
+      </div>
+    </div>
+
+    <div class="text-center text-sm h-10 truncate" >
+      {{ movie.Title }}
+    </div>
+  </div>
+</div>

@@ -4,12 +4,19 @@ import {ShowsComponent} from "./pages/shows/shows.component";
 import {MyMoviesComponent} from "./pages/my-movies/my-movies.component";
 import {LoginComponent} from "./pages/login/login.component";
 import {RegisterComponent} from "./pages/register/register.component";
+import {MovieDetailsComponent} from "./pages/movie-details/movie-details.component";
+import {permissionGuard} from "./guards/permission.guard";
 
 export const routes: Routes = [
-  {path: 'movies', component: MoviesComponent},
-  {path: 'shows', component: ShowsComponent},
-  {path: 'my-movies', component: MyMoviesComponent},
+  {path: 'filmes', canActivateChild: [permissionGuard],
+    children: [
+      {path: '', component: MoviesComponent},
+      {path: ':id', component: MovieDetailsComponent},
+    ]
+  },
+  {path: 'series', component: ShowsComponent},
+  {path: 'meus-filmes', component: MyMoviesComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  { path: '',   redirectTo: '/movies', pathMatch: 'full' }
+  { path: '',   redirectTo: '/filmes', pathMatch: 'full' }
 ];
