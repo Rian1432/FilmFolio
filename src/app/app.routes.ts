@@ -12,5 +12,5 @@ export const routes: Routes = [
     ]
   },
   {path: 'meus-filmes', component: MyMoviesComponent},
-  { path: '',   redirectTo: '/filmes', pathMatch: 'full' }
+  { path: '',   redirectTo: '/filmes-e-series', pathMatch: 'full' }
 ];
