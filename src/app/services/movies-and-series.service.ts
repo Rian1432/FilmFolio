@@ -3,13 +3,12 @@ import {environment} from "../../environments/environment";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {ImdbResponseInterface, ImdbItemDetails} from "../interfaces/imdb-interface";
 import {Observable} from "rxjs";
-import {MockApiFormDataInterface, MockApiResponseInterface} from "../interfaces/mock-api-interface";
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class MoviesService {
+export class MoviesAndSeriesService {
   private readonly API_URL:string = environment.baseUrl;
   private readonly MOCK_URL:string = environment.mockApi;
 
