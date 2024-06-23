@@ -1,8 +1,9 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {RouterLink, RouterLinkActive} from "@angular/router";
-import {ImdbResponseItemInterface, SaveMovieDataInterface} from "../../interfaces/imdb-interface";
+import {ImdbResponseItemInterface} from "../../interfaces/imdb-interface";
 import {MoviesService} from "../../services/movies.service";
+import {MockApiFormDataInterface} from "../../interfaces/mock-api-interface";
 
 @Component({
   selector: 'app-movie-list',
@@ -29,7 +30,7 @@ export class MovieListComponent {
   }
 
   async addToList(item:ImdbResponseItemInterface): Promise<void> {
-    const formData = {
+    const formData:MockApiFormDataInterface = {
       title: item.Title,
       year: item.Year,
       imdbID: item.imdbID,

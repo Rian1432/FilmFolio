@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {environment} from "../../environments/environment";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {ImdbResponseInterface, SaveMovieDataInterface, ImdbItemDetails} from "../interfaces/imdb-interface";
+import {ImdbResponseInterface, ImdbItemDetails} from "../interfaces/imdb-interface";
 import {Observable} from "rxjs";
+import {MockApiFormDataInterface, MockApiResponseInterface} from "../interfaces/mock-api-interface";
 
 @Injectable({
   providedIn: 'root'
@@ -26,33 +27,19 @@ export class MoviesService {
     return this.http.get<never>(this.API_URL, options)
   }
 
-  async saveMovie(data: {
-    year: string;
-    imdbID: string;
-    title: string;
-    type: string;
-    poster: string;
-    watched: boolean;
-  }):Promise<Observable<SaveMovieDataInterface>> {
+  async saveMovie(data: MockApiFormDataInterface):Promise<Observable<MockApiResponseInterface>> {
     return this.http.post<never>(this.MOCK_URL, data)
   }
 
-  async updateMovie(data: {
-    year: string;
-    imdbID: string;
-    title: string;
-    type: string;
-    poster: string;
-    watched: boolean;
-  }, id: string):Promise<Observable<SaveMovieDataInterface>> {
+  async updateMovie(data: MockApiFormDataInterface, id: string):Promise<Observable<MockApiResponseInterface>> {
     return this.http.put<never>(this.MOCK_URL + `/${id}`, data)
   }
 
-  async getMyMoviesAndSeries():Promise<Observable<SaveMovieDataInterface[]>> {
+  async getMyMoviesAndSeries():Promise<Observable<MockApiResponseInterface[]>> {
     return this.http.get<never>(this.MOCK_URL)
   }
 
-  async removeMovie(id: string):Promise<Observable<SaveMovieDataInterface>> {
+  async removeMovie(id: string):Promise<Observable<MockApiResponseInterface>> {
     return this.http.delete<never>(this.MOCK_URL + `/${id}`)
   }
 }

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {SaveMovieDataInterface} from "../../interfaces/imdb-interface";
 import {MoviesService} from "../../services/movies.service";
 import {DatePipe, NgForOf, NgIf} from "@angular/common";
 import {isEmpty} from "lodash";
 import {RouterLink} from "@angular/router";
 import {LoaderComponent} from "../../components/loader/loader.component";
+import {MockApiFormDataInterface, MockApiResponseInterface} from "../../interfaces/mock-api-interface";
 
 @Component({
   selector: 'app-my-movies',
@@ -19,7 +19,7 @@ import {LoaderComponent} from "../../components/loader/loader.component";
   templateUrl: './my-movies.component.html',
 })
 export class MyMoviesComponent implements OnInit{
-  public movieList:SaveMovieDataInterface[] = [];
+  public movieList:MockApiResponseInterface[] = [];
   public loading:boolean = false;
 
   constructor(private MoviesService: MoviesService,) {
@@ -31,7 +31,7 @@ export class MyMoviesComponent implements OnInit{
 
     (await this.MoviesService.getMyMoviesAndSeries())
       .subscribe({
-        next: (data: SaveMovieDataInterface[]) => {
+        next: (data: MockApiResponseInterface[]) => {
           this.movieList = data;
         },
         error: (e) => console.error(e),
@@ -53,8 +53,8 @@ export class MyMoviesComponent implements OnInit{
       })
   }
 
-  async updateMovie(item: SaveMovieDataInterface):Promise<void> {
-    const formData = {
+  async updateMovie(item: MockApiResponseInterface):Promise<void> {
+    const formData:MockApiFormDataInterface = {
       title: item.title,
       year: item.year,
       imdbID: item.imdbID,
