@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {ImdbItemDetails} from "../../interfaces/imdb-interface";
-import {ActivatedRoute} from "@angular/router";
+import {ImdbItemDetails, ImdbResponseItemInterface} from "../../interfaces/imdb-interface";
+import {ActivatedRoute, RouterLink} from "@angular/router";
 import {DatePipe, Location, NgIf} from "@angular/common";
 import {LoaderComponent} from "../../components/loader/loader.component";
-import {MoviesService} from "../../services/movies.service";
+import {MoviesAndSeriesService} from "../../services/movies-and-series.service";
+import {MockApiFormDataInterface} from "../../interfaces/mock-api-interface";
+import {MyMoviesAndSeriesService} from "../../services/my-movies-and-series.service";
 
 @Component({
   selector: 'app-item-details',
@@ -11,7 +13,8 @@ import {MoviesService} from "../../services/movies.service";
   imports: [
     DatePipe,
     LoaderComponent,
-    NgIf
+    NgIf,
+    RouterLink
   ],
   templateUrl: './item-details.component.html'
 })
@@ -21,7 +24,8 @@ export class ItemDetailsComponent implements OnInit{
   public loading:boolean = false;
 
   constructor(
-    private MoviesService: MoviesService,
+    private MoviesService: MoviesAndSeriesService,
+    private MyMoviesAndSeriesService: MyMoviesAndSeriesService,
     private route: ActivatedRoute,
     private location: Location,
   ) {}
@@ -39,6 +43,27 @@ export class ItemDetailsComponent implements OnInit{
           this.loading = false;
         },
         error: (e) => console.error(e),
+      })
+  }
+
+  async addToMyMoviesAndSeries(item:ImdbResponseItemInterface): Promise<void> {
+    const formData:MockApiFormDataInterface = {
+      title: item.Title,
+      year: item.Year,
+      imdbID: item.imdbID,
+      type: item.Type,
+      watched: false,
+      poster: item.Poster,
+    };
+
+    this.loading = true;
+    (await this.MyMoviesAndSeriesService.create(formData))
+      .subscribe({
+        next: () => {
+          alert('Adicionado ao Meus Filmes e Séries com sucesso!')
+        },
+        error: (e) => console.error(e),
+        complete: () => this.loading = false,
       })
   }
 

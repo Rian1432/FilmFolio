@@ -1,48 +1,45 @@
 import { Component } from '@angular/core';
-import {NgForOf, NgIf} from "@angular/common";
-import {FormsModule} from "@angular/forms";
-import {MoviesService} from "../../services/movies.service";
-import {Router, RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {ImdbResponseInterface, ImdbResponseItemInterface} from "../../interfaces/imdb-interface";
+import {debounce} from "lodash";
+import {Router} from "@angular/router";
 import {LoaderComponent} from "../../components/loader/loader.component";
+import {NgIf} from "@angular/common";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ShowListComponent} from "../../components/show-list/show-list.component";
-import { debounce } from "lodash";
+import {MoviesAndSeriesService} from "../../services/movies-and-series.service";
 
 @Component({
-  selector: 'app-movies',
+  selector: 'app-movies-and-series',
   standalone: true,
   imports: [
-    FormsModule,
-    RouterOutlet,
-    NgForOf,
-    NgIf,
     LoaderComponent,
-    RouterLink,
-    RouterLinkActive,
-    ShowListComponent
+    NgIf,
+    ReactiveFormsModule,
+    ShowListComponent,
+    FormsModule
   ],
-  templateUrl: './movies.component.html',
+  templateUrl: './movies-and-series.component.html'
 })
-export class MoviesComponent {
+export class MoviesAndSeriesComponent {
   public inputValue:string = '';
-  public movieList:ImdbResponseItemInterface[] = [];
+  public itemList:ImdbResponseItemInterface[] = [];
   public loading:boolean = false;
-  public searchForMovies = debounce(this.getMovies, 300);
+  public searchData = debounce(this.getMovies, 300);
 
   constructor(
-    private MoviesService: MoviesService,
+    private MoviesService: MoviesAndSeriesService,
     private router: Router
   ) {}
 
   async getMovies():Promise<void> {
     this.loading = true;
-    this.movieList = [];
+    this.itemList = [];
 
     (await this.MoviesService.index(this.inputValue))
       .subscribe({
         next:(data:ImdbResponseInterface) => {
           if (data.Response === 'True') {
-            this.movieList = data.Search;
+            this.itemList = data.Search;
           }
         },
         error: (e) => console.error(e),
@@ -51,6 +48,6 @@ export class MoviesComponent {
   }
 
   showMovie(movieId: string | number):void {
-    this.router.navigate([`/filmes/${movieId}`]);
+    this.router.navigate([`/filmes-e-series/${movieId}`]);
   }
 }

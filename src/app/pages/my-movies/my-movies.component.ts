@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MoviesService} from "../../services/movies.service";
+import {MoviesAndSeriesService} from "../../services/movies-and-series.service";
 import {MyMoviesAndSeriesService} from "../../services/my-movies-and-series.service";
 import {DatePipe, NgForOf, NgIf} from "@angular/common";
 import {isEmpty} from "lodash";

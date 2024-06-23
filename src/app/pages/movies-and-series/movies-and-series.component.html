@@ -1,10 +1,10 @@
 <div class="grid gap-y-3 w-full lg:w-3/4 h-full mx-auto">
   <div class="text-center text-xl sm:text-3xl mb-5 font-semibold text-accent sm:px-20">
-    Pesquise aqui por fimes já assistiu, ou que você quer ver:
+    Pesquise aqui por fimes e séries que já assistiu, ou que você quer ver:
   </div>
 
   <label class="custom-input">
-    <input (input)="searchForMovies()" [(ngModel)]="inputValue" type="text" class="grow" placeholder="Pesquisar por filmes" />
+    <input (input)="searchData()" [(ngModel)]="inputValue" type="text" class="grow" placeholder="Pesquisar por filmes e séries" />
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="#F7FBEF" class="w-4 h-4 opacity-70">
       <path
         fill-rule="evenodd"
@@ -14,10 +14,10 @@
   </label>
   <br>
 
-  <app-show-list *ngIf="movieList.length !== 0" [items]="movieList" (show)="showMovie($event)" />
+  <app-show-list *ngIf="itemList.length !== 0" [items]="itemList" (show)="showMovie($event)" />
 
-  <div *ngIf="movieList.length === 0 && !loading" class="text-xl text-center opacity-55">
-    Nenhum filme encontrado.
+  <div *ngIf="itemList.length === 0 && !loading" class="text-xl text-center opacity-55">
+    Nenhum filme ou série encontrado.
   </div>
 
   <app-loader *ngIf="loading" />

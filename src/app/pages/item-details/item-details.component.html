@@ -31,13 +31,18 @@
         </li>
       </ul>
     </div>
-    <button (click)="backPageHistory()" class="btn btn-sm btn-accent w-max">
-      < Voltar
-    </button>
+    <div class="flex gap-x-3">
+      <button (click)="backPageHistory()" class="btn btn-sm btn-accent w-max">
+        < Voltar
+      </button>
+      <button (click)="addToMyMoviesAndSeries(item)" class="btn btn-sm btn-success">
+        Adicionar +
+      </button>
+    </div>
   </div>
 </div>
 
-<div *ngIf="loading" class="my-20">
+<div *ngIf="!item && loading" class="my-20">
   <app-loader />
 </div>
 
