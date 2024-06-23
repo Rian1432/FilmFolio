@@ -44,9 +44,9 @@ export class MoviesComponent {
           if (data.Response === 'True') {
             this.movieList = data.Search;
           }
-          this.loading = false;
         },
         error: (e) => console.error(e),
+        complete: () => this.loading = false
       })
   }
 

@@ -44,3 +44,15 @@ interface RatingInterface {
   Source: string;
   Value: string;
 }
+
+export interface SaveMovieDataInterface {
+  id: string;
+  title: string;
+  year: string;
+  imdbID: string;
+  type: string;
+  poster: string;
+  watched: boolean;
+  createdAt: string;
+}
+

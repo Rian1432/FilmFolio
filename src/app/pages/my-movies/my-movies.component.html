@@ -1,1 +1,66 @@
-<p>my-movies works!</p>
+<div>
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-xl font-bold">
+      Meus filmes e séries
+    </h1>
+
+    <a routerLink="/" class="btn btn-sm btn-accent">
+      Adicionar +
+    </a>
+  </div>
+
+  <div *ngIf="!isEmpty(movieList) && !loading" class="overflow-x-auto">
+    <table class="table">
+      <thead>
+        <tr class="bg-primary text-base-100 border-0">
+          <th>Título</th>
+          <th>Tipo</th>
+          <th>Ano de lançamento</th>
+          <th>Assitido</th>
+          <th>Adicionado em</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let movie of movieList" class="border-gray-700">
+          <td>{{ movie.title }}</td>
+          <td>{{ movie.type === 'movie' ? 'filme' : 'serie' }}</td>
+          <td>{{ movie.year }}</td>
+          <td>{{ movie.watched ? 'Sim' : 'Não' }}</td>
+          <td>{{ movie.createdAt | date : 'dd/MM/yyyy' }}</td>
+          <td>
+            <div class="flex gap-x-2">
+              <a
+                [routerLink]="['/filmes/', movie.imdbID]"
+                class="btn btn-xs btn-info btn-square"
+                title="Visualizar filme">
+                +
+              </a>
+              <button
+                (click)="updateMovie(movie)"
+                class="btn btn-xs btn-success btn-square"
+                [title]="!movie.watched ? 'Marcar como asssistido' : 'Marcar como não asssistido'">
+                +
+              </button>
+              <button
+                (click)="removeMovie(movie.id)"
+                class="btn btn-xs btn-error btn-square"
+                title="Excluir da lista">
+                +
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="loading" class="my-20">
+    <app-loader />
+  </div>
+
+  <div *ngIf="isEmpty(movieList) && !loading" class="text-xl text-center opacity-55">
+    Nenhum registro encontrado! adicione algum filme ou série.
+  </div>
+</div>

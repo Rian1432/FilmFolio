@@ -1,16 +1,28 @@
-<div *ngIf="movieList.length !== 0" class="grid sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-5 gap-5 justify-center">
+<div class="grid sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-5 gap-5 justify-center">
   <div
     *ngFor="let movie of movieList"
     [title]="movie.Title"
-    class="flex flex-col gap-y-2 max-w-44 hover:scale-105 duration-200 cursor-pointer"
+    class="flex flex-col justify-between gap-y-2 max-w-44 hover:scale-105 duration-200 cursor-pointer relative"
   >
-    <div (click)="showItem(movie.imdbID)">
-      <div class="flex flex-col items-center justify-center shadow flex-grow">
-        <img [src]="movie.Poster" [alt]="movie.Title">
+    <div (click)="showItem(movie.imdbID)" class="flex flex-col items-center justify-center shadow flex-grow bg-primary">
+      <img *ngIf="movie.Poster !== 'N/A'" [src]="movie.Poster" [alt]="movie.Title">
+      <div *ngIf="movie.Poster === 'N/A'" class="flex flex-cow items-center bg-gray-400 h-52 w-full text-xs text-center">
+        <span class="p-3">
+          imagem não encontrada
+        </span>
       </div>
     </div>
 
-    <div class="text-center text-sm h-10 truncate" >
+    <button
+      (click)="addToList(movie)"
+      class="top-2.5 right-2.5 absolute btn btn-sm btn-circle btn-success text-lg shadow"
+      title="Salvar ao meus filmes e séries"
+      [disabled]="loading"
+    >
+      +
+    </button>
+
+    <div class="text-center text-sm h-10 truncate">
       {{ movie.Title }}
     </div>
   </div>
