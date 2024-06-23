@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import {FormsModule} from "@angular/forms";
-import {Router, RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
-import {MoviesService} from "../../services/movies.service";
 import {NgForOf, NgIf} from "@angular/common";
+import {FormsModule} from "@angular/forms";
+import {MoviesService} from "../../services/movies.service";
+import {Router, RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {ImdbResponseInterface, ImdbResponseItemInterface} from "../../interfaces/imdb-interface";
 import {LoaderComponent} from "../../components/loader/loader.component";
+import {ShowListComponent} from "../../components/show-list/show-list.component";
 import { debounce } from "lodash";
-import {MovieListComponent} from "../../components/movie-list/movie-list.component";
 
 @Component({
   selector: 'app-movies',
@@ -19,7 +19,7 @@ import {MovieListComponent} from "../../components/movie-list/movie-list.compone
     LoaderComponent,
     RouterLink,
     RouterLinkActive,
-    MovieListComponent
+    ShowListComponent
   ],
   templateUrl: './movies.component.html',
 })

@@ -14,7 +14,7 @@
   </label>
   <br>
 
-  <app-movie-list *ngIf="movieList.length !== 0" [movieList]="movieList" (show)="showMovie($event)" />
+  <app-show-list *ngIf="movieList.length !== 0" [items]="movieList" (show)="showMovie($event)" />
 
   <div *ngIf="movieList.length === 0 && !loading" class="text-xl text-center opacity-55">
     Nenhum filme encontrado.

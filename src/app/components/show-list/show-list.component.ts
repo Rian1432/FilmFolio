@@ -1,23 +1,20 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
-import {RouterLink, RouterLinkActive} from "@angular/router";
 import {ImdbResponseItemInterface} from "../../interfaces/imdb-interface";
 import {MockApiFormDataInterface} from "../../interfaces/mock-api-interface";
 import {MyMoviesAndSeriesService} from "../../services/my-movies-and-series.service";
 
 @Component({
-  selector: 'app-movie-list',
+  selector: 'app-show-list',
   standalone: true,
   imports: [
     NgForOf,
-    NgIf,
-    RouterLinkActive,
-    RouterLink
+    NgIf
   ],
-  templateUrl: './movie-list.component.html'
+  templateUrl: './show-list.component.html'
 })
-export class MovieListComponent {
-  @Input() movieList!: ImdbResponseItemInterface[];
+export class ShowListComponent {
+  @Input() items!: ImdbResponseItemInterface[];
   // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() show = new EventEmitter<string | number>();
   loading: boolean = false;
@@ -29,7 +26,7 @@ export class MovieListComponent {
     this.show.emit(id);
   }
 
-  async addToList(item:ImdbResponseItemInterface): Promise<void> {
+  async addToMyMoviesAndSeries(item:ImdbResponseItemInterface): Promise<void> {
     const formData:MockApiFormDataInterface = {
       title: item.Title,
       year: item.Year,
@@ -43,7 +40,7 @@ export class MovieListComponent {
     (await this.MyMoviesAndSeriesService.create(formData))
       .subscribe({
         next: () => {
-          alert('Filme adicionado com sucesso!')
+          alert('Adicionado ao Meus Filmes e Séries com sucesso!')
         },
         error: (e) => console.error(e),
         complete: () => this.loading = false,

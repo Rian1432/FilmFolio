@@ -1,12 +1,12 @@
 <div class="grid sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-5 gap-5 justify-center">
   <div
-    *ngFor="let movie of movieList"
-    [title]="movie.Title"
+    *ngFor="let item of items"
+    [title]="item.Title"
     class="flex flex-col justify-between gap-y-2 max-w-44 hover:scale-105 duration-200 cursor-pointer relative"
   >
-    <div (click)="showItem(movie.imdbID)" class="flex flex-col items-center justify-center shadow flex-grow bg-primary">
-      <img *ngIf="movie.Poster !== 'N/A'" [src]="movie.Poster" [alt]="movie.Title">
-      <div *ngIf="movie.Poster === 'N/A'" class="flex flex-cow items-center bg-gray-400 h-52 w-full text-xs text-center">
+    <div (click)="showItem(item.imdbID)" class="flex flex-col items-center justify-center shadow flex-grow bg-primary">
+      <img *ngIf="item.Poster !== 'N/A'" [src]="item.Poster" [alt]="item.Title">
+      <div *ngIf="item.Poster === 'N/A'" class="flex flex-cow items-center bg-gray-400 h-52 w-full text-xs text-center">
         <span class="p-3">
           imagem não encontrada
         </span>
@@ -14,7 +14,7 @@
     </div>
 
     <button
-      (click)="addToList(movie)"
+      (click)="addToMyMoviesAndSeries(item)"
       class="top-2.5 right-2.5 absolute btn btn-sm btn-circle btn-success text-lg shadow"
       title="Salvar ao meus filmes e séries"
       [disabled]="loading"
@@ -23,7 +23,7 @@
     </button>
 
     <div class="text-center text-sm h-10 truncate">
-      {{ movie.Title }}
+      {{ item.Title }}
     </div>
   </div>
 </div>
