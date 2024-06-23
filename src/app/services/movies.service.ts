@@ -26,20 +26,4 @@ export class MoviesService {
 
     return this.http.get<never>(this.API_URL, options)
   }
-
-  async saveMovie(data: MockApiFormDataInterface):Promise<Observable<MockApiResponseInterface>> {
-    return this.http.post<never>(this.MOCK_URL, data)
-  }
-
-  async updateMovie(data: MockApiFormDataInterface, id: string):Promise<Observable<MockApiResponseInterface>> {
-    return this.http.put<never>(this.MOCK_URL + `/${id}`, data)
-  }
-
-  async getMyMoviesAndSeries():Promise<Observable<MockApiResponseInterface[]>> {
-    return this.http.get<never>(this.MOCK_URL)
-  }
-
-  async removeMovie(id: string):Promise<Observable<MockApiResponseInterface>> {
-    return this.http.delete<never>(this.MOCK_URL + `/${id}`)
-  }
 }

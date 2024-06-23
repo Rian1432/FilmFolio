@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MoviesService} from "../../services/movies.service";
+import {MyMoviesAndSeriesService} from "../../services/my-movies-and-series.service";
 import {DatePipe, NgForOf, NgIf} from "@angular/common";
 import {isEmpty} from "lodash";
 import {RouterLink} from "@angular/router";
@@ -22,14 +23,14 @@ export class MyMoviesComponent implements OnInit{
   public movieList:MockApiResponseInterface[] = [];
   public loading:boolean = false;
 
-  constructor(private MoviesService: MoviesService,) {
+  constructor(private MyMoviesAndSeriesService: MyMoviesAndSeriesService) {
   }
 
   async getMyMovies():Promise<void> {
     this.loading = true;
     this.movieList = [];
 
-    (await this.MoviesService.getMyMoviesAndSeries())
+    (await this.MyMoviesAndSeriesService.index())
       .subscribe({
         next: (data: MockApiResponseInterface[]) => {
           this.movieList = data;
@@ -42,7 +43,7 @@ export class MyMoviesComponent implements OnInit{
   async removeMovie(id: string):Promise<void> {
     this.loading = true;
 
-    (await this.MoviesService.removeMovie(id))
+    (await this.MyMoviesAndSeriesService.destroy(id))
       .subscribe({
         next: () => {
           alert('Filme removido da lista com sucesso!');
@@ -65,7 +66,7 @@ export class MyMoviesComponent implements OnInit{
 
     this.loading = true;
 
-    (await this.MoviesService.updateMovie(formData, item.id))
+    (await this.MyMoviesAndSeriesService.update(formData, item.id))
       .subscribe({
         next: () => {
           alert('Filme atualizado com sucesso!');

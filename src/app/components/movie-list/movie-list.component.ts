@@ -2,8 +2,8 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {ImdbResponseItemInterface} from "../../interfaces/imdb-interface";
-import {MoviesService} from "../../services/movies.service";
 import {MockApiFormDataInterface} from "../../interfaces/mock-api-interface";
+import {MyMoviesAndSeriesService} from "../../services/my-movies-and-series.service";
 
 @Component({
   selector: 'app-movie-list',
@@ -22,7 +22,7 @@ export class MovieListComponent {
   @Output() show = new EventEmitter<string | number>();
   loading: boolean = false;
 
-  constructor(private MovieService: MoviesService) {
+  constructor(private MyMoviesAndSeriesService: MyMoviesAndSeriesService) {
   }
 
   showItem(id: string | number):void {
@@ -40,7 +40,7 @@ export class MovieListComponent {
     };
 
     this.loading = true;
-    (await this.MovieService.saveMovie(formData))
+    (await this.MyMoviesAndSeriesService.create(formData))
       .subscribe({
         next: () => {
           alert('Filme adicionado com sucesso!')
