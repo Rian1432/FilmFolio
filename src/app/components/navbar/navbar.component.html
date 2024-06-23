@@ -1,22 +1,57 @@
-<header>
-  <nav class="navbar bg-primary text-accent px-10">
-    <div class="navbar-start flex">
-      <button class="btn btn-square btn-ghost md:hidden block">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-      </button>
-      <div class="flex-1 hidden md:block">
-        <a class="btn btn-ghost text-xl">
-          <img src="../../../assets/images/film-folio-logo.png" alt="logo" class="h-8">
-        </a>
+<div class="drawer">
+  <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
+
+  <div class="drawer-content flex flex-col">
+    <div class="navbar bg-primary text-accent px-10">
+      <div class="flex-none lg:hidden">
+        <label for="my-drawer-3" aria-label="open sidebar" class="btn btn-square btn-ghost">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            class="inline-block h-6 w-6 stroke-current">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </label>
+      </div>
+
+      <div class="mx-2 flex-1 px-2 hidden md:block">
+        <img src="../../../assets/images/film-folio-logo.png" alt="logo" class="h-8">
+      </div>
+      <div class="hidden flex-none lg:block">
+        <ul class="menu menu-horizontal text-lg">
+          <li>
+            <a routerLink="/filmes-e-series" class="focus:text-accent !bg-transparent">
+              Pesquisar Filmes e series
+            </a>
+          </li>
+          <li>
+            <a routerLink="/meus-filmes" class="focus:text-accent !bg-transparent">
+              Meus filmes e séries
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
-    <div class="navbar-end gap-x-5 text-lg hidden md:flex text-nowrap">
-     <a routerLink="/filmes-e-series" routerLinkActive="active">
-       Pesquisar Filmes e series
-     </a>
-     <a routerLink="/meus-filmes" routerLinkActive="active">
-       Meus filmes e séries
-     </a>
-    </div>
-  </nav>
-</header>
+  </div>
+
+  <div class="drawer-side z-50">
+    <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay"></label>
+    <ul class="menu bg-primary text-accent text-xl min-h-full w-80 p-4 pt-10">
+      <li>
+        <a routerLink="/filmes-e-series" class="focus:text-accent !bg-transparent">
+          Pesquisar Filmes e series
+        </a>
+      </li>
+      <li>
+        <a routerLink="/meus-filmes" class="focus:text-accent !bg-transparent">
+          Meus filmes e séries
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
