@@ -1,10 +1,10 @@
-export interface MovieInterface {
+export interface ImdbResponseInterface {
   Response: string;
-  Search: SearchInterface[];
+  Search: ImdbResponseItemInterface[];
   totalResults: string;
 }
 
-export interface SearchInterface {
+export interface ImdbResponseItemInterface {
   Title: string;
   Year: string;
   imdbID: string;
@@ -12,7 +12,7 @@ export interface SearchInterface {
   Poster: string;
 }
 
-export interface MovieDetails {
+export interface ImdbItemDetails {
   Title: string;
   Year: string;
   Rated: string;

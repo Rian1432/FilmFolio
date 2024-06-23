@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MovieDetails} from "../../interfaces/movie-interface";
+import {ImdbItemDetails} from "../../interfaces/imdb-interface";
 import {MoviesService} from "../../services/movies.service";
 import {ActivatedRoute, RouterLink} from "@angular/router";
 import {DatePipe, NgIf, Location} from "@angular/common";
@@ -17,7 +17,7 @@ import {LoaderComponent} from "../../components/loader/loader.component";
   templateUrl: './movie-details.component.html'
 })
 export class MovieDetailsComponent implements OnInit{
-  public movie:MovieDetails | null = null;
+  public movie:ImdbItemDetails | null = null;
   public movieId:string | number = '';
   public loading:boolean = false;
 
@@ -33,7 +33,7 @@ export class MovieDetailsComponent implements OnInit{
 
     (await this.MoviesService.getMovie(this.movieId))
       .subscribe({
-        next:(data:MovieDetails) => {
+        next:(data:ImdbItemDetails) => {
           if (data.Response === 'True') {
             this.movie = data;
           }

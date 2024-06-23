@@ -3,7 +3,7 @@ import {FormsModule} from "@angular/forms";
 import {Router, RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {MoviesService} from "../../services/movies.service";
 import {NgForOf, NgIf} from "@angular/common";
-import {MovieInterface, SearchInterface} from "../../interfaces/movie-interface";
+import {ImdbResponseInterface, ImdbResponseItemInterface} from "../../interfaces/imdb-interface";
 import {LoaderComponent} from "../../components/loader/loader.component";
 import { debounce } from "lodash";
 import {MovieListComponent} from "../../components/movie-list/movie-list.component";
@@ -25,7 +25,7 @@ import {MovieListComponent} from "../../components/movie-list/movie-list.compone
 })
 export class MoviesComponent {
   public inputValue:string = '';
-  public movieList:SearchInterface[] = [];
+  public movieList:ImdbResponseItemInterface[] = [];
   public loading:boolean = false;
   public searchForMovies = debounce(this.getMovies, 300);
 
@@ -40,7 +40,7 @@ export class MoviesComponent {
 
     (await this.MoviesService.index(this.inputValue))
       .subscribe({
-        next:(data:MovieInterface) => {
+        next:(data:ImdbResponseInterface) => {
           if (data.Response === 'True') {
             this.movieList = data.Search;
           }

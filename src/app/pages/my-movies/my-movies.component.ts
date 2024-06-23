@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {SaveMovieDataInterface} from "../../interfaces/movie-interface";
+import {SaveMovieDataInterface} from "../../interfaces/imdb-interface";
 import {MoviesService} from "../../services/movies.service";
 import {DatePipe, NgForOf, NgIf} from "@angular/common";
 import {isEmpty} from "lodash";
