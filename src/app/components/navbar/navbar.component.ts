@@ -11,7 +11,6 @@ import {CommonModule} from "@angular/common";
     RouterLinkActive
   ],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
 
