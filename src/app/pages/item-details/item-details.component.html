@@ -1,0 +1,46 @@
+<div *ngIf="item" class="flex flex-col md:flex-row gap-x-10 justify-center items-center md:items-start">
+  <img [src]="item.Poster" [alt]="item.Title" class="max-w-72 md:max-w-3xl">
+
+  <div class="flex flex-col justify-between">
+    <div class="mb-5">
+      <h1 class="text-2xl font-bold text-accent mb-5 md:mt-0 mt-5">
+        {{item.Title}}
+      </h1>
+
+      <ul class="flex flex-col gap-y-3 text-lg">
+        <li>
+          <span class="font-bold">Diretor:</span> {{ item.Director }}
+        </li>
+        <li>
+          <span class="font-bold">Gênero:</span> {{ item.Genre }}
+        </li>
+        <li>
+          <span class="font-bold">Data de lançamento:</span> {{ item.Released | date : 'dd/MM/yyyy' }}
+        </li>
+        <li>
+          <span class="font-bold">Atores:</span> {{ item.Actors }}
+        </li>
+        <li>
+          <span class="font-bold">duração:</span> {{ item.Runtime }}
+        </li>
+        <li>
+          <span class="font-bold">Bilheteria:</span> {{ 'US' + item.BoxOffice }}
+        </li>
+        <li>
+          <span class="font-bold">Diretor:</span> {{ item.Director }}
+        </li>
+      </ul>
+    </div>
+    <button (click)="backPageHistory()" class="btn btn-sm btn-accent w-max">
+      < Voltar
+    </button>
+  </div>
+</div>
+
+<div *ngIf="loading" class="my-20">
+  <app-loader />
+</div>
+
+<div *ngIf="!item && !loading">
+  Infelizmente o que você não foi encontrado! Tente novamente mais tarde.
+</div>

@@ -21,7 +21,7 @@ export class MoviesService {
     return this.http.get<never>(this.API_URL, options)
   }
 
-  async getMovie(id: string | number):Promise<Observable<ImdbItemDetails>> {
+  async get(id: string | number):Promise<Observable<ImdbItemDetails>> {
     const options = {params: new HttpParams().set('i', id)}
 
     return this.http.get<never>(this.API_URL, options)

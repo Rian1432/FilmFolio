@@ -1,24 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ImdbItemDetails} from "../../interfaces/imdb-interface";
-import {MoviesService} from "../../services/movies.service";
-import {ActivatedRoute, RouterLink} from "@angular/router";
-import {DatePipe, NgIf, Location} from "@angular/common";
+import {ActivatedRoute} from "@angular/router";
+import {DatePipe, Location, NgIf} from "@angular/common";
 import {LoaderComponent} from "../../components/loader/loader.component";
+import {MoviesService} from "../../services/movies.service";
 
 @Component({
-  selector: 'app-movie-details',
+  selector: 'app-item-details',
   standalone: true,
   imports: [
     DatePipe,
-    RouterLink,
-    NgIf,
-    LoaderComponent
+    LoaderComponent,
+    NgIf
   ],
-  templateUrl: './movie-details.component.html'
+  templateUrl: './item-details.component.html'
 })
-export class MovieDetailsComponent implements OnInit{
-  public movie:ImdbItemDetails | null = null;
-  public movieId:string | number = '';
+export class ItemDetailsComponent implements OnInit{
+  public item:ImdbItemDetails | null = null;
+  public itemId:string | number = '';
   public loading:boolean = false;
 
   constructor(
@@ -27,15 +26,15 @@ export class MovieDetailsComponent implements OnInit{
     private location: Location,
   ) {}
 
-  async getMovieById():Promise<void> {
+  async getItemById():Promise<void> {
     this.loading = true;
-    this.movie = null;
+    this.item = null;
 
-    (await this.MoviesService.getMovie(this.movieId))
+    (await this.MoviesService.get(this.itemId))
       .subscribe({
         next:(data:ImdbItemDetails) => {
           if (data.Response === 'True') {
-            this.movie = data;
+            this.item = data;
           }
           this.loading = false;
         },
@@ -49,8 +48,8 @@ export class MovieDetailsComponent implements OnInit{
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.movieId = params['id'];
-      this.getMovieById()
+      this.itemId = params['id'];
+      this.getItemById()
     });
   }
 }
